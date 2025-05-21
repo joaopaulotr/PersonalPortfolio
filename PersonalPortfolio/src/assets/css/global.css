@@ -1,0 +1,32 @@
+/* Estilos globais aplicados ao site todo */
+
+/* Reset básico e configurações de fundo para HTML e body */
+html, body {
+  background-color: var(--cor-terciaria);
+  color: var(--cor-primaria);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Configuração do padrão de fundo com pontos/pattern */
+body {
+  min-height: 100vh;
+  background-color: var(--cor-terciaria);
+  background-image: radial-gradient(rgba(217,198,176, 0.1) 2px, transparent 0);
+  background-size: 30px 30px;
+  background-position: -5px -5px;
+}
+
+/* Configuração básica do container principal da aplicação */
+#app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Reset de box-sizing para todos os elementos */
+* {
+  box-sizing: border-box;
+}

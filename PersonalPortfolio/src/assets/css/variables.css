@@ -1,0 +1,57 @@
+/* Arquivo de variáveis CSS para o tema global do site */
+
+/* 
+ * Definição de variáveis CSS disponíveis globalmente 
+ * Contém a paleta de cores e outras configurações de estilo reutilizáveis
+ */
+:root {
+  /* Variáveis de cores da identidade visual principal */
+  --cor-primaria: #F2EFE9;      /* Cor clara (bege claro) - usada para textos e elementos principais */
+  --cor-secundaria: #D9C6B0;    /* Cor média (bege/marrom claro) - usada para destaques e elementos secundários */
+  --cor-terciaria: #0D0D0D;     /* Cor escura (preto) - usada para fundos e contraste */
+  
+  /* Variáveis adicionais para uso em todo o site */
+  --cor-texto-claro: #F2EFE9;   /* Para textos sobre fundos escuros */
+  --cor-texto-escuro: #0D0D0D;  /* Para textos sobre fundos claros */
+  --cor-fundo-claro: #F2EFE9;   /* Para seções com fundo claro */
+  --cor-fundo-escuro: #0D0D0D;  /* Para seções com fundo escuro */
+  --cor-destaque: #D9C6B0;      /* Para elementos que precisam se destacar visualmente */
+  
+  /* Variáveis para transições e efeitos */
+  --transicao-padrao: all 0.3s ease;  /* Transição padrão para efeitos hover e animações */
+  
+  /* Bordas e arredondamentos */
+  --borda-padrao: 1px solid var(--cor-secundaria);  /* Estilo padrão de bordas */
+  --raio-borda: 4px;                               /* Arredondamento padrão para elementos */
+}
+
+/* Classes utilitárias para aplicação rápida de cores de fundo */
+.bg-primaria {
+  background-color: var(--cor-primaria);
+}
+
+.bg-secundaria {
+  background-color: var(--cor-secundaria);
+}
+
+.bg-terciaria {
+  background-color: var(--cor-terciaria);
+}
+
+/* Classes utilitárias para aplicação rápida de cores de texto */
+.texto-primario {
+  color: var(--cor-primaria);
+}
+
+.texto-secundario {
+  color: var(--cor-secundaria);
+}
+
+.texto-terciario {
+  color: var(--cor-terciaria);
+}
+
+/* Configuração global de fonte */
+* {
+  font-family: 'Inter', sans-serif;
+}
