@@ -1,457 +1,245 @@
-<script setup>
-import { ref, computed } from 'vue'
-
-// Lista de projetos com imagens e tags de tecnologias
-const projects = ref([
-  {
-    id: 1,
-    title: 'Sistema de gestão hospitalar',
-    description: 'Desenvolvimento de sistema completo para gestão de hospitais e clínicas',
-    category: 'Web App',
-    year: '2022',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Express'],
-  },
-  {
-    id: 2,
-    title: 'Análise preditiva com IA',
-    description:
-      'Implementação de algoritmos de machine learning para previsão de resultados de negócios',
-    category: 'AI/ML',
-    year: '2023',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Python', 'TensorFlow', 'PyTorch', 'Pandas'],
-  },
-  {
-    id: 3,
-    title: 'Tendências em desenvolvimento web',
-    description: 'Artigo publicado na revista X sobre as mais recentes tendências em front-end',
-    category: 'Artigo',
-    year: '2022',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Research', 'Front-end', 'UX Design'],
-  },
-  {
-    id: 4,
-    title: 'Vue.js: Componentes avançados',
-    description: 'Palestra sobre arquiteturas modernas com Vue.js na conferência TechX',
-    category: 'Palestra',
-    year: '2023',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Vue.js', 'JavaScript', 'Component Design'],
-  },
-  {
-    id: 5,
-    title: 'Programa de mentoria dev',
-    description: 'Orientação personalizada para desenvolvedores iniciantes na área de front-end',
-    category: 'Mentoria',
-    year: '2024',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['Coaching', 'Front-end', 'Career Development'],
-  },
-  {
-    id: 6,
-    title: 'Contribuições open source',
-    description: 'Melhorias de performance e acessibilidade para framework popular de front-end',
-    category: 'Código',
-    year: '2023',
-    link: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    technologies: ['JavaScript', 'Open Source', 'Performance', 'Accessibility'],
-  },
-])
-
-// Termo de pesquisa inserido pelo usuário
-const searchQuery = ref('');
-
-// Projetos filtrados com base no termo de pesquisa
-const filteredProjects = computed(() => {
-  if (!searchQuery.value.trim()) {
-    // Se a pesquisa estiver vazia, retorna todos os projetos
-    return projects.value;
-  }
-  
-  const searchTerm = searchQuery.value.toLowerCase().trim();
-  
-  return projects.value.filter(project => {
-    return (
-      project.title.toLowerCase().includes(searchTerm) ||
-      project.description.toLowerCase().includes(searchTerm) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchTerm)) ||
-      project.category.toLowerCase().includes(searchTerm)
-    );
-  });
-});
-</script>
-
 <template>
   <div class="projects-container">
-    <!-- Seção de cabeçalho -->
-    <div class="projects-header">
-      <div class="input-group">
-        <div class="form-outline">
-          <input 
-            type="search" 
-            id="projectSearch" 
-            class="search-bar" 
-            v-model="searchQuery"  
-            placeholder="Pesquisar projeto ou tecnologia..." 
-          />
+    <div class="projects-grid">
+      <!-- Projeto 1 -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="Preview do Sistema de Gestão" loading="lazy">
         </div>
-        <button type="button" class="search-button" aria-label="Pesquisar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Grid de projetos -->
-    <div class="project-grid">
-      <div v-if="filteredProjects.length === 0" class="no-results">
-        <p>Nenhum projeto encontrado para "{{ searchQuery }}"</p>
-      </div>
-      <div v-for="project in filteredProjects" :key="project.id" class="project-card">
-        <div class="project-image-container">
-          <img :src="project.imageUrl" :alt="project.title" class="project-image" />
-          <div class="project-overlay">
-            <a :href="project.link" class="project-link">Ver detalhes</a>
-          </div>
-        </div>
-        <div class="project-info">
+        <div class="project-content">
           <div class="project-header">
-            <h3 class="project-title">{{ project.title }}</h3>
-            <span class="project-year">{{ project.year }}</span>
+            <h3 class="project-title">Fiscal de Maringá</h3>
+            <div class="project-links">
+              <a href="#" class="project-link github" aria-label="Ver código no GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="#" class="project-link external" aria-label="Ver projeto online">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+              </a>
+            </div>
           </div>
-          <p class="project-description">{{ project.description }}</p>
-          <div class="project-tech-tags">
-            <span v-for="(tech, index) in project.technologies" :key="index" class="tech-tag">
-              {{ tech }}
-            </span>
+          <p class="project-description">
+           Python e análise de dados, para ajudar qualquer cidadão a acessar informações da cidade com facilidade.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Streamlit</span>
           </div>
         </div>
       </div>
+        <!-- Projeto 2 -->
     </div>
 
-    <!-- Seção de contato/CTA -->
-    <div class="projects-cta">
-      <h2 class="cta-title">Interessado em trabalhar comigo?</h2>
-      <p class="cta-text">Entre em contato para discutirmos seu próximo projeto</p>
-      <a href="#" class="cta-button">Vamos conversar</a>
+    <div class="more-projects">
+      <p>Você pode conferir o restante dos meus projetos <a href="https://github.com/joaopaulotr" target="_blank" rel="noopener noreferrer">aqui</a>.</p>
     </div>
   </div>
 </template>
 
+<script setup>
+// Página de projetos
+</script>
+
 <style scoped>
-/* Container principal da página de Projetos */
 .projects-container {
-  padding: 1rem 0;
-  max-width: 100%;
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Mensagem quando nenhum resultado é encontrado */
-.no-results {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 3rem;
-  color: var(--cor-secundaria);
-  background-color: rgba(242, 239, 233, 0.03);
-  border-radius: 8px;
-  margin-bottom: 2rem;
-}
-
-.no-results p {
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-/* Cabeçalho da seção de projetos */
-.projects-header {
-  margin-bottom: 2rem;
-}
-
-.input-group {
-  display: flex;
-  margin-bottom: 2rem;
-}
-
-.form-outline {
-  flex: 1;
-}
-
-.search-bar {
-  background-color: transparent;
-  border: 1px solid var(--cor-secundaria);
-  border-radius: 8px 0 0 8px;
-  padding: 0.5rem 1rem;
-  width: 100%;
-  height: 45px;
-  color: var(--cor-secundaria);
-  font-size: 0.95rem;
-}
-
-.search-bar:focus {
-  outline: none;
-  border-color: var(--cor-primaria);
-}
-
-.search-button {
-  background-color: transparent;
-  color: var(--cor-secundaria);
-  padding: 0.5rem 1rem;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--cor-secundaria);
-  border-radius: 0 8px 8px 0;
-  border-left: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.search-button:hover {
-  background-color: var(--cor-secundaria);
-  color: var(--cor-terciaria);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.projects-title {
-  font-size: 2.5rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: var(--cor-primaria);
-  letter-spacing: -0.5px;
-}
-
-.projects-subtitle {
-  font-size: 1.2rem;
-  color: var(--cor-secundaria);
-  max-width: 600px;
-}
-
-/* Grid de projetos */
-.project-grid {
+.projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 2rem;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
-/* Card do projeto */
 .project-card {
-  border-radius: 8px;
+  background: rgba(13, 13, 13, 0.02);
+  border-radius: 20px;
   overflow: hidden;
-  background-color: rgba(242, 239, 233, 0.03);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: var(--transicao-padrao);
+  border: 1px solid rgba(217, 198, 176, 0.1);
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(13, 13, 13, 0.1);
+  border-color: rgba(217, 198, 176, 0.2);
 }
 
-/* Container da imagem do projeto */
-.project-image-container {
-  position: relative;
-  height: 180px;
-  overflow: hidden;
-}
-
-/* Imagem do projeto */
 .project-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: var(--transicao-padrao);
 }
 
-.project-card:hover .project-image {
+.project-card:hover .project-image img {
   transform: scale(1.05);
 }
 
-/* Overlay sobre a imagem no hover */
-.project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(13, 13, 13, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project-card:hover .project-overlay {
-  opacity: 1;
-}
-
-/* Link dentro do overlay */
-.project-link {
-  color: var(--cor-primaria);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--cor-primaria);
-  border-radius: 4px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.project-link:hover {
-  background-color: var(--cor-primaria);
-  color: var(--cor-terciaria);
-}
-
-/* Informações do projeto */
-.project-info {
+.project-content {
   padding: 1.5rem;
 }
 
-/* Cabeçalho do projeto (título e ano) */
 .project-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.75rem;
-}
-
-.project-title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--cor-primaria);
-}
-
-.project-year {
-  font-size: 0.8rem;
-  color: var(--cor-secundaria);
-  background-color: rgba(217, 198, 176, 0.08);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-}
-
-/* Descrição do projeto */
-.project-description {
-  margin: 0 0 1rem 0;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: var(--cor-secundaria);
-}
-
-/* Tags de tecnologia */
-.project-tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.tech-tag {
-  font-size: 0.75rem;
-  color: var(--cor-secundaria);
-  background-color: rgba(242, 239, 233, 0.05);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  border: 1px solid rgba(242, 239, 233, 0.1);
-  transition: all 0.2s ease;
-}
-
-.project-card:hover .tech-tag {
-  border-color: rgba(242, 239, 233, 0.2);
-  color: var(--cor-primaria);
-}
-
-/* Seção de CTA no final */
-.projects-cta {
-  margin-top: 3rem;
-  padding: 3rem 0;
-  text-align: center;
-  border-top: 1px solid rgba(242, 239, 233, 0.1);
-}
-
-.cta-title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--cor-primaria);
   margin-bottom: 1rem;
 }
 
-.cta-text {
-  font-size: 1.1rem;
+.project-title {
+  color: var(--cor-primaria);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.project-link {
   color: var(--cor-secundaria);
-  margin-bottom: 2rem;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--cor-primaria);
-  color: var(--cor-terciaria);
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  transition: var(--transicao-padrao);
+  background: rgba(217, 198, 176, 0.1);
 }
 
-.cta-button:hover {
-  background-color: var(--cor-secundaria);
+.project-link:hover {
+  color: var(--cor-primaria);
+  background: rgba(242, 239, 233, 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Media queries para responsividade */
+.project-description {
+  color: var(--cor-secundaria);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  background: rgba(217, 198, 176, 0.15);
+  color: var(--cor-secundaria);
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(217, 198, 176, 0.2);
+  transition: var(--transicao-padrao);
+}
+
+.tech-tag:hover {
+  background: rgba(217, 198, 176, 0.25);
+  border-color: rgba(217, 198, 176, 0.3);
+}
+
+.more-projects {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(217, 198, 176, 0.2);
+}
+
+.more-projects p {
+  color: var(--cor-secundaria);
+  font-size: 1rem;
+}
+
+.more-projects a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  transition: var(--transicao-padrao);
+  font-weight: 500;
+}
+
+.more-projects a:hover {
+  color: var(--cor-secundaria);
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  .projects-container {
+    padding: 1rem;
   }
   
-  .input-group {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project-content {
+    padding: 1.25rem;
+  }
+  
+  .project-header {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
   
-  .search-button {
-    margin-top: 0.5rem;
-    border-radius: 8px;
-    border-left: 1px solid var(--cor-secundaria);
-    width: 100%;
+  .project-links {
+    margin-left: 0;
   }
   
-  .search-bar {
-    border-radius: 8px;
+  .project-title {
+    font-size: 1.125rem;
+  }
+
+  .project-image {
+    height: 180px;
   }
 }
 
-@media (max-width: 576px) {
-  .projects-title {
-    font-size: 2rem;
+@media (max-width: 480px) {
+  .project-card {
+    border-radius: 16px;
+  }
+  
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
   }
 
-  .projects-subtitle {
-    font-size: 1rem;
+  .project-link {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
   }
 
-  .cta-title {
-    font-size: 1.5rem;
-  }
-
-  .cta-text {
-    font-size: 1rem;
+  .project-image {
+    height: 160px;
   }
 }
 </style>
