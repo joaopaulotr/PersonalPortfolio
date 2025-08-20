@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import About from '../views/About.vue'
 import Projects from '../views/Projects.vue'
-import Escrita from '../views/Escrita.vue'
+import Conteudo from '../views/Conteudo.vue'
 import Resume from '../views/Resume.vue'
 
 const router = createRouter({
@@ -27,9 +27,9 @@ const router = createRouter({
       component: Resume,
     },
     {
-      path: '/escrita',
-      name: 'escrita',
-      component: Escrita,
+      path: '/content',
+      name: 'content',
+      component: Conteudo,
     },
   ],
 })
