@@ -28,7 +28,7 @@
           <path d="M5 11H7V13H5V11ZM8 11H10V13H8V11ZM11 11H13V13H11V13ZM14 11H16V13H14V11ZM17 11H19V13H17V11Z"/>
           <path d="M6 14H18V16H6V14Z"/>
         </svg>
-        o que estou construindo:
+        o que já construí:
       </h3>
       <div class="project-list">
         <div class="project-item">
@@ -146,10 +146,6 @@
   color: var(--cor-secundaria);
   font-size: 1rem;
   line-height: 1.6;
-}
-
-.info-text {
-  margin-right: 0.5rem;
 }
 
 .company-logo {
