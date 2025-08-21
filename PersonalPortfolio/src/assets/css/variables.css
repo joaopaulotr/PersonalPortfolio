@@ -5,7 +5,7 @@
  * Contém a paleta de cores e outras configurações de estilo reutilizáveis
  */
 :root {
-  /* Variáveis de cores da identidade visual principal */
+  /* Variáveis de cores da identidade visual principal - MODO ESCURO */
   --cor-primaria: #F2EFE9;      /* Cor clara (bege claro) - usada para textos e elementos principais */
   --cor-secundaria: #D9C6B0;    /* Cor média (bege/marrom claro) - usada para destaques e elementos secundários */
   --cor-terciaria: #0D0D0D;     /* Cor escura (preto) - usada para fundos e contraste */
@@ -23,6 +23,21 @@
   /* Bordas e arredondamentos */
   --borda-padrao: 1px solid var(--cor-secundaria);  /* Estilo padrão de bordas */
   --raio-borda: 4px;                               /* Arredondamento padrão para elementos */
+}
+
+/* MODO CLARO - Tema elegante inspirado no Martin Sit */
+[data-theme="light"] {
+  /* Inversão elegante das cores para modo claro */
+  --cor-primaria: #2c2c2c;        /* Texto escuro elegante */
+  --cor-secundaria: #666666;      /* Texto secundário suave */
+  --cor-terciaria: #ffffff;       /* Fundo branco limpo */
+  
+  /* Ajustes específicos para modo claro */
+  --cor-texto-claro: #ffffff;     /* Textos sobre fundos escuros */
+  --cor-texto-escuro: #2c2c2c;    /* Textos sobre fundos claros */
+  --cor-fundo-claro: #ffffff;     /* Fundo branco */
+  --cor-fundo-escuro: #f8f8f8;    /* Fundo cinza muito claro */
+  --cor-destaque: #8B7355;        /* Cor de destaque mais sutil */
 }
 
 /* Classes utilitárias para aplicação rápida de cores de fundo */

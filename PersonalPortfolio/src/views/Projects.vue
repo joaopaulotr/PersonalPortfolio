@@ -9,7 +9,7 @@
         <input 
           v-model="searchQuery"
           type="text" 
-          placeholder="Pesquisar projetos por nome ou tecnologia..."
+          :placeholder="t.searchPlaceholder"
           class="search-input"
         >
       </div>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <p class="project-description">
-            {{ project.description }}
+            {{ t[project.descriptionKey] }}
           </p>
           <div class="project-tech">
             <span v-for="tech in project.tech" :key="tech" class="tech-tag">{{ tech }}</span>
@@ -63,17 +63,20 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
+
+// Injetar o sistema de tradução
+const t = inject('translations')
 
 // Estado da pesquisa
 const searchQuery = ref('')
 
-// Lista de projetos
+// Lista de projetos com chaves de tradução
 const projects = ref([
   {
     id: 1,
     title: 'Fiscal de Maringá',
-    description: 'Python e análise de dados, para ajudar qualquer cidadão a acessar informações da cidade de maringá com facilidade.',
+    descriptionKey: 'pacSolutionsDesc',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
     github: 'https://github.com/joaopaulotr/FiscalDeMaringa',
     demo: 'https://fiscaldemaringa.streamlit.app/',
@@ -82,7 +85,7 @@ const projects = ref([
   {
     id: 2,
     title: 'Syntax Fight - Jogo em VUE.JS',
-    description: 'Jogo interativo feito em Vue.js para praticar lógica e sintaxe de programação de forma divertida. O projeto traz uma experiência única e envolvente para quem quer aprender brincando.',
+    descriptionKey: 'lipoGameDesc',
     image: '/assets/img/image-1.png',
     github: 'https://github.com/joaopaulotr/SyntaxFight-GameProject',
     demo: 'https://syntaxfight.netlify.app/',
@@ -91,7 +94,7 @@ const projects = ref([
     {
     id: 3,
     title: 'Projeto Landing Page - Originá Exclusive',
-    description: 'Landing page desenvolvida profissionalmente para a marca Originá. O projeto foca em uma experiência de usuário envolvente e responsiva.',
+    descriptionKey: 'cesuProjectDesc',
     image: '/assets/img/image.png',
     demo: 'https://www.originaexclusive.com.br/index.html',
     tech: [ 'JavaScript', 'HTML', 'CSS', 'Zero Sheets']
@@ -121,9 +124,23 @@ const filteredProjects = computed(() => {
 
 <style scoped>
 .projects-container {
+  padding-top: 0px !important;
   padding: 1.5rem 0;
   max-width: 1000px;
   margin: 0 auto;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animação de entrada suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Seção de pesquisa */
@@ -157,10 +174,23 @@ const filteredProjects = computed(() => {
   transition: var(--transicao-padrao);
 }
 
+/* Ajustes para modo claro */
+[data-theme="light"] .search-input {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(44, 44, 44, 0.15);
+  color: var(--cor-primaria);
+}
+
 .search-input:focus {
   outline: none;
   border-color: var(--cor-primaria);
   background: rgba(217, 198, 176, 0.05);
+}
+
+/* Focus para modo claro */
+[data-theme="light"] .search-input:focus {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--cor-primaria);
 }
 
 .search-input::placeholder {
@@ -262,10 +292,23 @@ const filteredProjects = computed(() => {
   border: 1px solid rgba(217, 198, 176, 0.08);
 }
 
+/* Ajustes para modo claro */
+[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(44, 44, 44, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
 .project-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 30px rgba(13, 13, 13, 1);
   border-color: rgba(217, 198, 176, 0.15);
+}
+
+/* Hover para modo claro */
+[data-theme="light"] .project-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: rgba(44, 44, 44, 0.2);
 }
 
 .project-image {
@@ -321,8 +364,26 @@ const filteredProjects = computed(() => {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  transition: var(--transicao-padrao);
+  transition: all 0.2s ease;
   background: rgba(217, 198, 176, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Linha animada para project links */
+.project-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--cor-primaria);
+  transition: width 0.3s ease;
+}
+
+.project-link:hover::before {
+  width: 100%;
 }
 
 .project-link:hover {
@@ -352,12 +413,34 @@ const filteredProjects = computed(() => {
   font-size: 0.75rem;
   font-weight: 500;
   border: 1px solid rgba(217, 198, 176, 0.15);
-  transition: var(--transicao-padrao);
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Linha animada para tech tags */
+.tech-tag::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--cor-primaria);
+  transition: width 0.3s ease;
+}
+
+.tech-tag:hover::before {
+  width: 100%;
 }
 
 .tech-tag:hover {
   background: rgba(217, 198, 176, 0.25);
   border-color: rgba(217, 198, 176, 0.3);
+  color: var(--cor-primaria);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 198, 176, 0.1);
 }
 
 .more-projects {
