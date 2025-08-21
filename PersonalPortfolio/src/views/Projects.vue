@@ -94,7 +94,15 @@ const projects = ref([
     description: 'Landing page desenvolvida profissionalmente para a marca Originá. O projeto foca em uma experiência de usuário envolvente e responsiva.',
     image: '/assets/img/image.png',
     demo: 'https://www.originaexclusive.com.br/index.html',
-    tech: [ 'JavaScript', 'HTML', 'CSS']
+    tech: [ 'JavaScript', 'HTML', 'CSS', 'Zero Sheets']
+  },
+  {
+    id: 4,
+    title: 'Projeto Landing Page - LipoRedux',
+    description: 'Landing page desenvolvida profissionalmente para Cristiane, vendedora de LipoRedux. O projeto foca em captação de cadastros e internacionalização.',
+    image: '/assets/img/lipo.png',
+    demo: 'https://crisliporedux.com/',
+    tech: [ 'JavaScript', 'HTML', 'CSS', 'AWS S3', 'Zero Sheets']
   }
 ])
 
