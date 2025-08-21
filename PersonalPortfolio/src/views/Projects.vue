@@ -114,11 +114,23 @@ const filteredProjects = computed(() => {
   if (!searchQuery.value) return projects.value
   
   const query = searchQuery.value.toLowerCase()
-  return projects.value.filter(project => 
-    project.title.toLowerCase().includes(query) ||
-    project.description.toLowerCase().includes(query) ||
-    project.tech.some(tech => tech.toLowerCase().includes(query))
-  )
+  return projects.value.filter(project => {
+    // Busca no título
+    const titleMatch = project.title.toLowerCase().includes(query)
+    
+    // Busca na descrição (verificando se existe description ou descriptionKey)
+    let descriptionMatch = false
+    if (project.description) {
+      descriptionMatch = project.description.toLowerCase().includes(query)
+    } else if (project.descriptionKey && t.value && t.value[project.descriptionKey]) {
+      descriptionMatch = t.value[project.descriptionKey].toLowerCase().includes(query)
+    }
+    
+    // Busca nas tecnologias
+    const techMatch = project.tech.some(tech => tech.toLowerCase().includes(query))
+    
+    return titleMatch || descriptionMatch || techMatch
+  })
 })
 </script>
 
