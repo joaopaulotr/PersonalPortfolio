@@ -102,7 +102,7 @@ const projects = ref([
     description: 'Landing page desenvolvida profissionalmente para Cristiane, vendedora de LipoRedux. O projeto foca em captação de cadastros e internacionalização.',
     image: '/assets/img/lipo.png',
     demo: 'https://crisliporedux.com/',
-    tech: [ 'JavaScript', 'HTML', 'CSS', 'AWS S3', 'Zero Sheets']
+    tech: [ 'JavaScript', 'HTML', 'CSS', 'AWS S3', 'AWS Route 53', 'AWS CloudFront', 'Zero Sheets']
   }
 ])
 
