@@ -262,7 +262,7 @@
 }
 
 .skill-category {
-  background: rgba(13, 13, 13, 0.02);
+  background: rgba(13, 13, 13, 0.82);
   border: 1px solid rgba(217, 198, 176, 0.08);
   border-radius: 12px;
   padding: 1.25rem;

@@ -255,7 +255,7 @@ const filteredProjects = computed(() => {
 }
 
 .project-card {
-  background: rgba(13, 13, 13, 0.02);
+  background: rgba(13, 13, 13, 0.08);
   border-radius: 16px;
   overflow: hidden;
   transition: var(--transicao-padrao);
@@ -264,7 +264,7 @@ const filteredProjects = computed(() => {
 
 .project-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(13, 13, 13, 0.08);
+  box-shadow: 0 15px 30px rgba(13, 13, 13, 1);
   border-color: rgba(217, 198, 176, 0.15);
 }
 
